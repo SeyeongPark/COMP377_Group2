@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [data, setData] = useState([{}]);
   useEffect(() => {
-    fetch("/members").then(
+    fetch("http://localhost:5000/members").then(
       (res) => res.json()
       ).then(
         data => {
