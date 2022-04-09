@@ -4,8 +4,14 @@ import numpy as np
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.densenet import preprocess_input as preprocess_fun
 from tensorflow.keras.models import load_model
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
+@app.route("/")
+def index():
+    return {"Group 2": "Group Project"}
 
 @app.route("/members")
 def members():
