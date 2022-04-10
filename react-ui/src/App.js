@@ -19,26 +19,18 @@ function App() {
     }
     setIsLoading(true);
     setImage(<img alt="not fount" src={URL.createObjectURL(file[0])} />);
-    const name = file[0].name;
-    let folderName;
-    if (name.toLowerCase().startsWith("happy")) {
-      folderName = "Happy";
-    } else if (name.toLowerCase().startsWith("angry")) {
-      folderName = "Angry";
-    } else if (name.toLowerCase().startsWith("fear")) {
-      folderName = "Fear";
-    } else if (name.toLowerCase().startsWith("neutral")) {
-      folderName = "Neutral";
-    } else if (name.toLowerCase().startsWith("sad")) {
-      folderName = "Sad";
-    } else if (name.toLowerCase().startsWith("suprise")) {
-      folderName = "Suprise";
-    }
+
+    const formData = new FormData()
+    formData.append('image', file[0])
 
     axios
-      .post(`http://localhost:5000/predict`, {
-        link: `./Training/${folderName}/${file[0].name}`,
-      })
+      .post('http://localhost:5000/predict', formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
       .then((res) => {
         setpredictResult(res.data);
         setIsLoading(false);

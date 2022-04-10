@@ -1,5 +1,6 @@
 from pyexpat import model
 from flask import Flask, request
+import os
 import numpy as np
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.densenet import preprocess_input as preprocess_fun
@@ -7,21 +8,24 @@ from tensorflow.keras.models import load_model
 from flask_cors import CORS
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = './UploadedImages/'
 CORS(app)
 
 @app.route("/")
 def index():
     return {"Group 2": "Group Project"}
 
-@app.route("/predict", methods= ["POST", "GET"])
+@app.route("/predict", methods= ["POST"])
 def predict():
-    data = request.json
-    
     # Load Image
     try:
-        my_image = load_img(data['link'], target_size=(IMG_HEIGHT, IMG_WIDTH))
+        image = request.files['image']
+        filePath = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
+        print('path', filePath)
+        image.save(filePath)
+        my_image = load_img(filePath, target_size=(IMG_HEIGHT, IMG_WIDTH))
     except:
-        return f"File not found {data['link']}", 400
+        return f"Image not found or corrupted", 400
 
     # Preproces Image
     my_image = img_to_array(my_image)
