@@ -13,14 +13,10 @@ CORS(app)
 def index():
     return {"Group 2": "Group Project"}
 
-@app.route("/members")
-def members():
-    return {"members": ["Member1", "Member2", "Member3"]}
-
 @app.route("/predict")
 def predict():
     data = request.json
-    
+    print(data)
     # Load Image
     try:
         my_image = load_img(data['link'], target_size=(IMG_HEIGHT, IMG_WIDTH))
@@ -45,5 +41,5 @@ if __name__ == "__main__":
     IMG_HEIGHT = 48
     IMG_WIDTH = 48
     model = load_model('../emotion-detection/emotion_model')
-
+    
     app.run(debug=True)

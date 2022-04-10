@@ -1,22 +1,14 @@
 import { Alert, Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import "./App.css";
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
+
 function App() {
-  const [data, setData] = useState([{}]);
   const [file, setFile] = useState([]);
-  const [selectedImage, setSelectedImage] = useState();
   const [image, setImage] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:5000/members")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setData(data);
-      })
-      .catch((error) => {
-        alert(error);
-      });
+
   }, []);
 
   const handleSubmit = (e) => {
@@ -26,20 +18,14 @@ function App() {
       return;
     }
 
-    setSelectedImage(file[0]);
     setImage(<img alt="not fount" src={URL.createObjectURL(file[0])} />);
+    console.log('Send Data is: ',file[0].name)
 
-    console.log(file);
-    console.log(file[0]);
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("fileName", file[0].name);
-    // try {
-    //   const response = await api.fileUploadToServer(formData);
-    //   console.log(response);
-    // } catch (ex) {
-    //   console.log(ex);
-    // }
+    axios.post(`http://localhost:5000/predict`, { link : file[0].name })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
   };
 
   const handleUpload = async (e) => {
@@ -69,11 +55,7 @@ function App() {
 
           <Button type="submit">Upload and get result</Button>
         </form>
-        {typeof data.members === "undefined" ? (
-          <p>Loading...</p>
-        ) : (
-          data.members.map((member, i) => <p key={i}>{member}</p>)
-        )}
+        
       </Container>
     </div>
   );
