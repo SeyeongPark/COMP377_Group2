@@ -13,10 +13,10 @@ CORS(app)
 def index():
     return {"Group 2": "Group Project"}
 
-@app.route("/predict")
+@app.route("/predict", methods= ["POST", "GET"])
 def predict():
     data = request.json
-    print(data)
+    
     # Load Image
     try:
         my_image = load_img(data['link'], target_size=(IMG_HEIGHT, IMG_WIDTH))
