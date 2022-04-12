@@ -12,8 +12,8 @@ Members:
 1. Download the dataset: https://www.kaggle.com/apollo2506/facial-recognition-dataset
 2. Extract the Training and Testing Dataset
 3. Follow the folder structure. It should be something like this.
-        - emotion-detection
-          - Testing
+        * emotion-detection
+          * Testing
             - Angry
             - Fear
             - Happy
