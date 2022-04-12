@@ -74,12 +74,13 @@ body{
   padding: 20px;
   text-align: center;
   font-size: 20px;
+  position: flex;
 }
 
 .right-col{
-  padding: 50px; 
   width: 500px;
   height: 300px;
+  position: flex;
 }
 
 img{
