@@ -56,26 +56,41 @@ function App() {
       <Navbar bg="dark" variant="dark" className="p-2">
         <Navbar.Brand href="#">COMP 377 - Group 2</Navbar.Brand>
       </Navbar>
-      <Container>
+      <div className="container">
         <form onSubmit={handleSubmit}>
-          <section className="center">😡🤢😱😊😐😔😲 Emotion Detection</section>
-          <div className="row">
-            <div className="col-6">
-              <Form.Group className="position-relative mb-3">
-                <Form.Control
-                  type="file"
-                  onChange={handleUpload}
-                  accept=".jpg,.jpeg"
-                />
-              </Form.Group>
-            </div>
-            <div className="col-6">{image}</div>
-          </div>
+          <h2 className="center">😐😡😲 Emotion Detection 😔😱😊</h2>
 
-          <Button type="submit">Upload and get result</Button>
-          <Button type="reset" className="ms-2" onClick={handleReset}>
-            Clear result
-          </Button>
+          <table>
+            <thead>
+              <tr>
+                <th className="left-col">
+                    <Form.Group>
+                      <Form.Control
+                        type="file"
+                        onChange={handleUpload}
+                        accept=".jpg,.jpeg"
+                      />
+                    </Form.Group>
+                </th>
+                <th rowspan="2" className="right-col">
+                   {image} 
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <Button type="submit">Upload and get result</Button>
+                  <Button type="reset" onClick={handleReset}>
+                    Clear result
+                  </Button>
+                </td>
+                <td>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
         </form>
         {isLoading &&  <section className="center"><CircularIndeterminate /></section> }
         {predictResult && (
@@ -84,9 +99,12 @@ function App() {
             <p>The emotion for this image is: {predictResult}</p>
           </Alert>
         )}
-      </Container>
+      </div>
     </div>
   );
 }
 
 export default App;
+
+
+
