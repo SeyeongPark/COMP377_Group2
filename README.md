@@ -44,3 +44,6 @@ Members:
 5. Select an IMAGE (.jpg) from your files
 6. Click Upload and Get Result
 7. An emotion prediction will be displayed.
+
+# Preview
+<img width="1440" alt="Screen Shot 2022-11-08 at 12 43 18 PM" src="https://user-images.githubusercontent.com/67844037/200637468-b6d21ba2-ba9f-4719-be30-bdc33c13c2cd.png">
